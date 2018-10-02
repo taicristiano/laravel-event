@@ -18,3 +18,7 @@ Route::get('/test-event', [
     'uses' => 'EventController@testEvent',
     'as' => 'test-event',
 ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
