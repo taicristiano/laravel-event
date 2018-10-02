@@ -22,3 +22,7 @@ Route::get('/test-event', [
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test-queue', [
+    'uses' => 'QueueController@testQueue',
+    'as' => 'test-queue',
+]);
