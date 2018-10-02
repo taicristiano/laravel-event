@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test-event', [
+    'uses' => 'EventController@testEvent',
+    'as' => 'test-event',
+]);
