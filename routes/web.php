@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('firebase', [
+    'uses' => 'SyncFirebaseController@index'
+]);
