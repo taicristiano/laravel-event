@@ -13,7 +13,8 @@ class QueueController extends Controller
     {
         $user = User::find(1);
         var_dump(22);
-        $job = (new SendWelcomeEmail($user))->delay(10);
+        $job = (new SendWelcomeEmail($user));
+        // command php artisan queue:work
         dispatch($job);
         dd(333);
     }

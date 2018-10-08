@@ -26,3 +26,9 @@ Route::get('/test-queue', [
     'uses' => 'QueueController@testQueue',
     'as' => 'test-queue',
 ]);
+
+Route::get('test-edit-comment', [
+    'uses' => 'AuthorizationController@testEditComment',
+    'as' => 'test-edit-comment',
+    // 'middleware' => 'can:edit-comment'
+]);
