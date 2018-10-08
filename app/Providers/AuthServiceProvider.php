@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Policies\CommentPolicy;
+use App\Comment;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        Comment::class => CommentPolicy::class,
     ];
 
     /**
@@ -31,5 +34,6 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
         // Gate::define('edit-comment', '\App\Policies\UserPolicy@editComment');
+        Gate::resource('comments', 'CommentPolicy');
     }
 }

@@ -27,8 +27,14 @@ Route::get('/test-queue', [
     'as' => 'test-queue',
 ]);
 
-Route::get('test-edit-comment', [
+Route::get('gate', [
     'uses' => 'AuthorizationController@testEditComment',
-    'as' => 'test-edit-comment',
-    // 'middleware' => 'can:edit-comment'
+    'as' => 'test-gate',
+    // 'middleware' => 'can:edit-comment,test'
+]);
+
+Route::get('policy/{id}', [
+    'uses' => 'AuthorizationController@testPolicy',
+    'as' => 'test-policy',
+    // 'middleware' => 'can:edit-comment,test'
 ]);
