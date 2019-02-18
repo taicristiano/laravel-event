@@ -16,7 +16,14 @@ class CompaniesController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = Company::paginate(1);
+        $companies = Company::orderBy($request->field, $request->order);
+        if ($request->search) {
+            $companies = $companies->where('name', 'like', '%' . $request->search . '%')
+                                    ->orWhere('address', 'like', '%' . $request->search . '%')
+                                    ->orWhere('website', 'like', '%' . $request->search . '%')
+                                    ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+        $companies = $companies->paginate($request->limit);
         return response()->json($companies);
     }
 

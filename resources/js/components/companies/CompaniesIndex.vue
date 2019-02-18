@@ -7,18 +7,29 @@
         <div class="panel panel-default">
             <div class="panel-heading">Companies list</div>
             <div class="panel-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" v-model="searchQuery">
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <input type="text" class="form-control" placeholder="Search" v-model="searchQuery" @change="getCompanies">
+                    </div>
+                    <div class="col-sm offset-6">
+                        <select class="form-control" v-model="numberRecord" @change="getCompanies">
+                          <option>5</option>
+                          <option>10</option>
+                          <option>15</option>
+                          <option>20</option>
+                          <option>25</option>
+                        </select>
+                    </div>
                 </div>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th v-for="column, index in sortOrders"
-                            @click="sortBy(index)"
-                            :class="{ active: sortKey == index || sortKey == '' && index == 'name'} ">
-                            {{ index | capitalize }}
-                            <span v-if="sortKey == index || sortKey == '' && index == 'name'">
-                                <span v-if="sortOrders[index] > 0">
+                        <th v-for="column, index in columns"
+                            @click="generateFunctionSort(column, sortKey, sortValue)"
+                            :class="{ active: sortKey == column } ">
+                            {{ column | capitalizeFirstLetter }}
+                            <span v-if="sortKey == column">
+                                <span v-if="sortValue == 'asc'">
                                     <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
                                 </span>
                                 <span v-else>
@@ -72,13 +83,15 @@
                 sortOrders[key] = 1
             })
             return {
-                sortKey: '',
-                sortOrders: sortOrders,
+                sortKey: 'name',
+                sortValue: 'asc',
                 searchQuery: '',
                 companies: {
                     current_page: 1
                 },
-                offset: 2
+                offset: 2,
+                columns: columns,
+                numberRecord: 10
             }
         },
         mounted() {
@@ -89,36 +102,21 @@
         },
         computed: {
             filteredData: function () {
-                var sortKey = this.sortKey;
-                var filterKey = this.searchQuery && this.searchQuery.toLowerCase();
-                var order = this.sortOrders[sortKey] || 1
-                var data = this.companies.data
-                if (filterKey) {
-                    data = data.filter(function (row) {
-                        return Object.keys(row).some(function (key) {
-                            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
-                        })
-                    })
-                }
-                if (sortKey) {
-                    data = data.slice().sort(function (a, b) {
-                        a = a[sortKey]
-                        b = b[sortKey]
-                        return (a === b ? 0 : a > b ? 1 : -1) * order
-                    })
-                }
-                return data
+                return this.companies.data;
             }
         },
         filters: {
             capitalize: function (str) {
                 return str.charAt(0).toUpperCase() + str.slice(1)
-            }
+            },
+            capitalizeFirstLetter: function(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            },
         },
         methods: {
             getCompanies() {
                 var app = this;
-                var url = '/api/v1/companies?page=' + this.companies.current_page
+                var url = '/api/v1/companies?page=' + this.companies.current_page + '&field=' + this.sortKey + '&order=' + this.sortValue + '&search=' + this.searchQuery + '&limit=' + this.numberRecord;
                 axios.get(url)
                     .then(function (resp) {
                         app.companies = resp.data;
@@ -139,9 +137,22 @@
                         });
                 }
             },
-            sortBy: function (key) {
-                this.sortKey = key
-                this.sortOrders[key] = this.sortOrders[key] * -1
+            sortBy: function (column, order) {
+                this.sortKey = column
+                this.sortValue = order
+                this.getCompanies();
+            },
+            generateFunctionSort(column, sortKey, sortValue) {
+                if (sortKey == column) {
+                    if (sortValue == 'asc') {
+                        sortValue = 'desc'
+                    } else {
+                        sortValue = 'asc'
+                    }
+                    this.sortBy(column, sortValue)
+                } else {
+                    this.sortBy(column, 'asc')
+                }
             }
         }
     }

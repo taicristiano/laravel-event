@@ -60452,6 +60452,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60463,13 +60474,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sortOrders[key] = 1;
         });
         return {
-            sortKey: '',
-            sortOrders: sortOrders,
+            sortKey: 'name',
+            sortValue: 'asc',
             searchQuery: '',
             companies: {
                 current_page: 1
             },
-            offset: 2
+            offset: 2,
+            columns: columns,
+            numberRecord: 10
         };
     },
     mounted: function mounted() {
@@ -60481,36 +60494,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         filteredData: function filteredData() {
-            var sortKey = this.sortKey;
-            var filterKey = this.searchQuery && this.searchQuery.toLowerCase();
-            var order = this.sortOrders[sortKey] || 1;
-            var data = this.companies.data;
-            if (filterKey) {
-                data = data.filter(function (row) {
-                    return Object.keys(row).some(function (key) {
-                        return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
-                    });
-                });
-            }
-            if (sortKey) {
-                data = data.slice().sort(function (a, b) {
-                    a = a[sortKey];
-                    b = b[sortKey];
-                    return (a === b ? 0 : a > b ? 1 : -1) * order;
-                });
-            }
-            return data;
+            return this.companies.data;
         }
     },
     filters: {
         capitalize: function capitalize(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
+        },
+        capitalizeFirstLetter: function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
     },
     methods: {
         getCompanies: function getCompanies() {
             var app = this;
-            var url = '/api/v1/companies?page=' + this.companies.current_page;
+            var url = '/api/v1/companies?page=' + this.companies.current_page + '&field=' + this.sortKey + '&order=' + this.sortValue + '&search=' + this.searchQuery + '&limit=' + this.numberRecord;
             axios.get(url).then(function (resp) {
                 app.companies = resp.data;
             }).catch(function (resp) {
@@ -60528,9 +60526,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
 
-        sortBy: function sortBy(key) {
-            this.sortKey = key;
-            this.sortOrders[key] = this.sortOrders[key] * -1;
+        sortBy: function sortBy(column, order) {
+            this.sortKey = column;
+            this.sortValue = order;
+            this.getCompanies();
+        },
+        generateFunctionSort: function generateFunctionSort(column, sortKey, sortValue) {
+            if (sortKey == column) {
+                if (sortValue == 'asc') {
+                    sortValue = 'desc';
+                } else {
+                    sortValue = 'asc';
+                }
+                this.sortBy(column, sortValue);
+            } else {
+                this.sortBy(column, 'asc');
+            }
         }
     }
 });
@@ -60782,28 +60793,77 @@ var render = function() {
         "div",
         { staticClass: "panel-body" },
         [
-          _c("div", { staticClass: "form-group" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.searchQuery,
-                  expression: "searchQuery"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Search" },
-              domProps: { value: _vm.searchQuery },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c("div", { staticClass: "row mb-3" }, [
+            _c("div", { staticClass: "col-sm" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchQuery,
+                    expression: "searchQuery"
                   }
-                  _vm.searchQuery = $event.target.value
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Search" },
+                domProps: { value: _vm.searchQuery },
+                on: {
+                  change: _vm.getCompanies,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchQuery = $event.target.value
+                  }
                 }
-              }
-            })
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm offset-6" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.numberRecord,
+                      expression: "numberRecord"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.numberRecord = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.getCompanies
+                    ]
+                  }
+                },
+                [
+                  _c("option", [_vm._v("5")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("10")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("15")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("20")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("25")])
+                ]
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("table", { staticClass: "table table-bordered table-striped" }, [
@@ -60811,31 +60871,30 @@ var render = function() {
               _c(
                 "tr",
                 [
-                  _vm._l(_vm.sortOrders, function(column, index) {
+                  _vm._l(_vm.columns, function(column, index) {
                     return _c(
                       "th",
                       {
-                        class: {
-                          active:
-                            _vm.sortKey == index ||
-                            (_vm.sortKey == "" && index == "name")
-                        },
+                        class: { active: _vm.sortKey == column },
                         on: {
                           click: function($event) {
-                            return _vm.sortBy(index)
+                            return _vm.generateFunctionSort(
+                              column,
+                              _vm.sortKey,
+                              _vm.sortValue
+                            )
                           }
                         }
                       },
                       [
                         _vm._v(
                           "\n                        " +
-                            _vm._s(_vm._f("capitalize")(index)) +
+                            _vm._s(_vm._f("capitalizeFirstLetter")(column)) +
                             "\n                        "
                         ),
-                        _vm.sortKey == index ||
-                        (_vm.sortKey == "" && index == "name")
+                        _vm.sortKey == column
                           ? _c("span", [
-                              _vm.sortOrders[index] > 0
+                              _vm.sortValue == "asc"
                                 ? _c("span", [
                                     _c("i", {
                                       staticClass: "fa fa-sort-alpha-asc",
