@@ -7,20 +7,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Companies list</div>
             <div class="panel-body">
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <input type="text" class="form-control" placeholder="Search" v-model="searchQuery" @change="getCompanies">
-                    </div>
-                    <div class="col-sm offset-6">
-                        <select class="form-control" v-model="numberRecord" @change="getCompanies">
-                          <option>5</option>
-                          <option>10</option>
-                          <option>15</option>
-                          <option>20</option>
-                          <option>25</option>
-                        </select>
-                    </div>
-                </div>
+                <companies-filter
+                    v-model="filter"
+                    @filter="getCompanies()"
+                    :value="filter">
+                </companies-filter>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -74,31 +65,31 @@
 
 <script>
     import CompaniesPagination from './CompaniesPagination.vue';
+    import CompaniesFilter from './CompaniesFilter.vue';
 
     export default {
+        components: {
+            CompaniesPagination,
+            CompaniesFilter
+        },
         data: function () {
             var columns = ['name', 'address', 'website', 'email']
-            var sortOrders = {}
-            columns.forEach(function (key) {
-                sortOrders[key] = 1
-            })
             return {
                 sortKey: 'name',
                 sortValue: 'asc',
-                searchQuery: '',
                 companies: {
                     current_page: 1
                 },
                 offset: 2,
                 columns: columns,
-                numberRecord: 10
+                filter: {
+                    numberRecord: 10,
+                    searchQuery: ''
+                }
             }
         },
         mounted() {
             this.getCompanies()
-        },
-        components: {
-            CompaniesPagination
         },
         computed: {
             filteredData: function () {
@@ -116,7 +107,7 @@
         methods: {
             getCompanies() {
                 var app = this;
-                var url = '/api/v1/companies?page=' + this.companies.current_page + '&field=' + this.sortKey + '&order=' + this.sortValue + '&search=' + this.searchQuery + '&limit=' + this.numberRecord;
+                var url = '/api/v1/companies?page=' + this.companies.current_page + '&field=' + this.sortKey + '&order=' + this.sortValue + '&search=' + this.filter.searchQuery + '&limit=' + this.filter.numberRecord;
                 axios.get(url)
                     .then(function (resp) {
                         app.companies = resp.data;

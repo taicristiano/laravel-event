@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    export default{
+    export default {
         props: {
             pagination: {
                 type: Object,
@@ -28,33 +28,33 @@
                 default: 2
             }
         },
-    computed: {
-        pagesNumber() {
-            if (!this.pagination.to) {
-                return [];
+        computed: {
+            pagesNumber() {
+                if (!this.pagination.to) {
+                    return [];
+                }
+                let from = this.pagination.current_page - this.offset;
+                console.log(from);
+                if (from < 1) {
+                    from = 1;
+                }
+                let to = from + (this.offset * 2);
+                console.log(this.pagination.last_page, to);
+                if (to >= this.pagination.last_page) {
+                    to = this.pagination.last_page;
+                }
+                let pagesArray = [];
+                for (let page = from; page <= to; page++) {
+                    pagesArray.push(page);
+                }
+                return pagesArray;
             }
-            let from = this.pagination.current_page - this.offset;
-            console.log(from);
-            if (from < 1) {
-                from = 1;
+        },
+        methods : {
+            changePage(page) {
+                this.pagination.current_page = page;
+                this.$emit('paginate');
             }
-            let to = from + (this.offset * 2);
-            console.log(this.pagination.last_page, to);
-            if (to >= this.pagination.last_page) {
-                to = this.pagination.last_page;
-            }
-            let pagesArray = [];
-            for (let page = from; page <= to; page++) {
-                pagesArray.push(page);
-            }
-            return pagesArray;
-        }
-    },
-    methods : {
-        changePage(page) {
-            this.pagination.current_page = page;
-            this.$emit('paginate');
         }
     }
-}
 </script>
