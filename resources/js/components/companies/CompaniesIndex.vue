@@ -48,12 +48,22 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <companies-pagination
+                    :pagination="companies"
+                    @paginate="getCompanies()"
+                    :offset="offset">
+                </companies-pagination>
+                <!-- @paginate="getCompanies()" -->
+                <!-- v-on:paginate=getCompanies() -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import CompaniesPagination from './CompaniesPagination.vue';
+
     export default {
         data: function () {
             var columns = ['name', 'address', 'website', 'email']
@@ -62,31 +72,27 @@
                 sortOrders[key] = 1
             })
             return {
-                companies: [],
                 sortKey: '',
                 sortOrders: sortOrders,
-                searchQuery: ''
+                searchQuery: '',
+                companies: {
+                    current_page: 1
+                },
+                offset: 2
             }
         },
         mounted() {
-            var app = this;
-            var url = '/api/v1/companies?order=name&sort=asc'
-            axios.get(url)
-                .then(function (resp) {
-                    app.companies = resp.data;
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    alert("Could not load companies");
-                });
+            this.getCompanies()
+        },
+        components: {
+            CompaniesPagination
         },
         computed: {
             filteredData: function () {
-                var sortKey = this.sortKey
-                var filterKey = this.searchQuery && this.searchQuery.toLowerCase()
-                console.log(filterKey);
+                var sortKey = this.sortKey;
+                var filterKey = this.searchQuery && this.searchQuery.toLowerCase();
                 var order = this.sortOrders[sortKey] || 1
-                var data = this.companies
+                var data = this.companies.data
                 if (filterKey) {
                     data = data.filter(function (row) {
                         return Object.keys(row).some(function (key) {
@@ -110,12 +116,23 @@
             }
         },
         methods: {
+            getCompanies() {
+                var app = this;
+                var url = '/api/v1/companies?page=' + this.companies.current_page
+                axios.get(url)
+                    .then(function (resp) {
+                        app.companies = resp.data;
+                    })
+                    .catch(function (resp) {
+                        alert("Could not load companies");
+                    });
+            },
             deleteEntry(id, index) {
                 if (confirm("Do you really want to delete it?")) {
                     var app = this;
                     axios.delete('/api/v1/companies/' + id)
                         .then(function (resp) {
-                            app.companies.splice(index, 1);
+                            app.companies.data.splice(index, 1);
                         })
                         .catch(function (resp) {
                             alert("Could not delete company");

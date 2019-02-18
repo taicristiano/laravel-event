@@ -16,8 +16,8 @@ class CompaniesController extends Controller
      */
     public function index(Request $request)
     {
-
-        return Company::orderBy($request->order, $request->sort)->get();
+        $companies = Company::paginate(1);
+        return response()->json($companies);
     }
 
     /**
