@@ -7,37 +7,23 @@
         <div class="panel panel-default">
             <div class="panel-heading">Edit company</div>
             <div class="panel-body">
-                <form v-on:submit="saveForm()">
-                    <div class="col-xs-12 form-group">
-                            <label class="control-label">Company name</label>
-                            <input v-validate="{ required: true }" type="text" v-model="company.name" name="name" class="form-control">
-                            <span v-show="errors.has('name')" class="text-danger">{{ errors.first('name') }}</span>
-                        </div>
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Company address</label>
-                            <input v-validate="{ required: true, min: 6 }" type="text" v-model="company.address" name="address" class="form-control">
-                            <span v-show="errors.has('address')" class="text-danger">{{ errors.first('address') }}</span>
-                        </div>
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Company website</label>
-                            <input type="text" v-model="company.website" class="form-control">
-                        </div>
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Company email</label>
-                            <input v-validate="{ required: true, email: true }" type="text" v-model="company.email" name="email" class="form-control">
-                            <span v-show="errors.has('email')" class="text-danger">{{ errors.first('email') }}</span>
-                        </div>
-                        <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Create</button>
-                        </div>
-                </form>
+                <companies-form
+                    @save="saveForm()"
+                    v-bind:company="company"
+                    :validator="$validator">
+                </companies-form>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import CompaniesForm from './CompaniesForm.vue';
+
     export default {
+        components: {
+            CompaniesForm
+        },
         mounted() {
             let app = this;
             let id = app.$route.params.id;

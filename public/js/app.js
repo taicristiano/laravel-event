@@ -14037,7 +14037,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(64);
 
 
 /***/ }),
@@ -14052,7 +14052,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_companies_CompaniesIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_companies_CompaniesIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_companies_CompaniesCreate_vue__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_companies_CompaniesCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_companies_CompaniesCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_companies_CompaniesEdit_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_companies_CompaniesEdit_vue__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_companies_CompaniesEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_companies_CompaniesEdit_vue__);
 
 /**
@@ -14081,7 +14081,7 @@ window.Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(58));
+Vue.component('example-component', __webpack_require__(61));
 
 var routes = [{
     path: '/',
@@ -61081,7 +61081,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(53)
 /* template */
-var __vue_template__ = __webpack_require__(54)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61125,25 +61125,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue__);
 //
 //
 //
@@ -61164,7 +61147,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        CompaniesForm: __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue___default.a
+    },
     data: function data() {
         return {
             company: {
@@ -61203,6 +61191,310 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/companies/CompaniesForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-56b651f0", Component.options)
+  } else {
+    hotAPI.reload("data-v-56b651f0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        company: this.company,
+        validator: this.validator
+    },
+    methods: {
+        save: function save() {
+            this.$emit('save');
+        }
+    },
+    created: function created() {
+        if (this.validator) {
+            console.log(this.$validator, this.validator);
+            this.$validator = this.validator;
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("form", { on: { submit: _vm.save } }, [
+    _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("label", { staticClass: "control-label" }, [_vm._v("Company name")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: { required: true },
+            expression: "{ required: true }"
+          },
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.company.name,
+            expression: "company.name"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", name: "name" },
+        domProps: { value: _vm.company.name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.company, "name", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.errors.has("name"),
+              expression: "errors.has('name')"
+            }
+          ],
+          staticClass: "text-danger"
+        },
+        [_vm._v(_vm._s(_vm.errors.first("name")))]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("label", { staticClass: "control-label" }, [
+        _vm._v("Company address")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: { required: true, min: 6 },
+            expression: "{ required: true, min: 6 }"
+          },
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.company.address,
+            expression: "company.address"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", name: "address" },
+        domProps: { value: _vm.company.address },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.company, "address", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.errors.has("address"),
+              expression: "errors.has('address')"
+            }
+          ],
+          staticClass: "text-danger"
+        },
+        [_vm._v(_vm._s(_vm.errors.first("address")))]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("label", { staticClass: "control-label" }, [
+        _vm._v("Company website")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.company.website,
+            expression: "company.website"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.company.website },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.company, "website", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("label", { staticClass: "control-label" }, [_vm._v("Company email")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: { required: true, email: true },
+            expression: "{ required: true, email: true }"
+          },
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.company.email,
+            expression: "company.email"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", name: "email" },
+        domProps: { value: _vm.company.email },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.company, "email", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.errors.has("email"),
+              expression: "errors.has('email')"
+            }
+          ],
+          staticClass: "text-danger"
+        },
+        [_vm._v(_vm._s(_vm.errors.first("email")))]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-56b651f0", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -61226,212 +61518,25 @@ var render = function() {
         _vm._v("Create new company")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        [
+          _c("companies-form", {
+            attrs: { company: _vm.company, validator: _vm.$validator },
             on: {
-              submit: function($event) {
+              save: function($event) {
                 return _vm.saveForm()
               }
             }
-          },
-          [
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company name")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true },
-                    expression: "{ required: true }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.name,
-                    expression: "company.name"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "name" },
-                domProps: { value: _vm.company.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "name", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("name"),
-                      expression: "errors.has('name')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("name")))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company address")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true, min: 6 },
-                    expression: "{ required: true, min: 6 }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.address,
-                    expression: "company.address"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "address" },
-                domProps: { value: _vm.company.address },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "address", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("address"),
-                      expression: "errors.has('address')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("address")))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company website")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.website,
-                    expression: "company.website"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.company.website },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "website", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company email")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true, email: true },
-                    expression: "{ required: true, email: true }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.email,
-                    expression: "company.email"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "email" },
-                domProps: { value: _vm.company.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "email", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("email"),
-                      expression: "errors.has('email')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("email")))]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ])
+          })
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xs-12 form-group" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -61442,15 +61547,15 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(56)
+var __vue_script__ = __webpack_require__(59)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(60)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61489,30 +61594,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue__);
 //
 //
 //
@@ -61533,7 +61621,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        CompaniesForm: __WEBPACK_IMPORTED_MODULE_0__CompaniesForm_vue___default.a
+    },
     mounted: function mounted() {
         var app = this;
         var id = app.$route.params.id;
@@ -61581,7 +61674,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -61605,212 +61698,25 @@ var render = function() {
     _c("div", { staticClass: "panel panel-default" }, [
       _c("div", { staticClass: "panel-heading" }, [_vm._v("Edit company")]),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        [
+          _c("companies-form", {
+            attrs: { company: _vm.company, validator: _vm.$validator },
             on: {
-              submit: function($event) {
+              save: function($event) {
                 return _vm.saveForm()
               }
             }
-          },
-          [
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company name")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true },
-                    expression: "{ required: true }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.name,
-                    expression: "company.name"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "name" },
-                domProps: { value: _vm.company.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "name", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("name"),
-                      expression: "errors.has('name')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("name")))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company address")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true, min: 6 },
-                    expression: "{ required: true, min: 6 }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.address,
-                    expression: "company.address"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "address" },
-                domProps: { value: _vm.company.address },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "address", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("address"),
-                      expression: "errors.has('address')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("address")))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company website")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.website,
-                    expression: "company.website"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.company.website },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "website", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-12 form-group" }, [
-              _c("label", { staticClass: "control-label" }, [
-                _vm._v("Company email")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: { required: true, email: true },
-                    expression: "{ required: true, email: true }"
-                  },
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.company.email,
-                    expression: "company.email"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "email" },
-                domProps: { value: _vm.company.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.company, "email", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("email"),
-                      expression: "errors.has('email')"
-                    }
-                  ],
-                  staticClass: "text-danger"
-                },
-                [_vm._v(_vm._s(_vm.errors.first("email")))]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ])
+          })
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xs-12 form-group" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -61821,15 +61727,15 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(59)
+var __vue_script__ = __webpack_require__(62)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(63)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -61868,7 +61774,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61897,7 +61803,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -61940,7 +61846,7 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
