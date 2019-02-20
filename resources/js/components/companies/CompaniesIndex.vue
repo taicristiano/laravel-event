@@ -75,16 +75,16 @@
         data: function () {
             var columns = ['name', 'address', 'website', 'email']
             return {
-                sortKey: 'name',
-                sortValue: 'asc',
+                sortKey: localStorage.getItem("sorkKey") ? localStorage.getItem("sorkKey") : 'name',
+                sortValue: localStorage.getItem("sortValue") ? localStorage.getItem("sortValue") : 'asc',
                 companies: {
-                    current_page: 1
+                    current_page: localStorage.getItem("current_page") ? localStorage.getItem("current_page") : 1
                 },
                 offset: 2,
                 columns: columns,
                 filter: {
-                    numberRecord: 10,
-                    searchQuery: ''
+                    numberRecord: localStorage.getItem("numberRecord") ? localStorage.getItem("numberRecord") : 10,
+                    searchQuery: localStorage.getItem("searchQuery") ? localStorage.getItem("searchQuery") : '',
                 }
             }
         },
@@ -97,9 +97,6 @@
             }
         },
         filters: {
-            capitalize: function (str) {
-                return str.charAt(0).toUpperCase() + str.slice(1)
-            },
             capitalizeFirstLetter: function(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             },
@@ -108,6 +105,19 @@
             getCompanies() {
                 var app = this;
                 var url = '/api/v1/companies?page=' + this.companies.current_page + '&field=' + this.sortKey + '&order=' + this.sortValue + '&search=' + this.filter.searchQuery + '&limit=' + this.filter.numberRecord;
+
+                localStorage.removeItem("sorkKey");
+                localStorage.removeItem("sortValue");
+                localStorage.removeItem("numberRecord");
+                localStorage.removeItem("searchQuery");
+                localStorage.removeItem("current_page");
+
+                localStorage.setItem("sorkKey", this.sortKey ? this.sortKey : '');
+                localStorage.setItem("sortValue", this.sortValue ? this.sortValue : '');
+                localStorage.setItem("numberRecord", this.filter.numberRecord ? this.filter.numberRecord : 10);
+                localStorage.setItem("searchQuery", this.filter.searchQuery ? this.filter.searchQuery : '');
+                localStorage.setItem("current_page", this.companies.current_page);
+
                 axios.get(url)
                     .then(function (resp) {
                         app.companies = resp.data;
