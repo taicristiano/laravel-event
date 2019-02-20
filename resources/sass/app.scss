@@ -12,3 +12,15 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+#products .item img { background-color: #000; }
+#products .item p.lead { margin-bottom: 0; }
+#products .item .number-in-stock.few { color: #E0A14F; }
+#products .item .number-in-stock.none { color: #C45E5E; }
+
+#top-navigation a,
+#top-navigation .cart-info {
+    // width: 100%;
+}
+
+#top-navigation .cart-info .stats { margin-right: 5px; }

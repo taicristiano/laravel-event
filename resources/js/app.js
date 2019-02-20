@@ -9,6 +9,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueRouter from 'vue-router';
+window.Vue.use(VueRouter);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,6 +20,27 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+import Ecommerce from './components/ecommerces/EcommerceComponent.vue';
+import Cart from './components/ecommerces/CartComponent.vue';
+
+const routes = [
+    {
+        path: '/',
+        name: 'Ecommerce',
+        components: {
+            Ecommerce: Ecommerce
+        }
+    },
+    {
+        path: '/cart',
+        name: 'Cart',
+        components: {
+            Cart: Cart
+        }
+    },
+]
+
+const router = new VueRouter({ routes })
+
+const app = new Vue({ router }).$mount('#app')
+
