@@ -14079,15 +14079,11 @@ Vue.component('example-component', __webpack_require__(42));
 var routes = [{
     path: '/',
     name: 'Ecommerce',
-    components: {
-        Ecommerce: __WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue___default.a
-    }
+    component: __WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue___default.a
 }, {
     path: '/cart',
     name: 'Cart',
-    components: {
-        Cart: __WEBPACK_IMPORTED_MODULE_2__components_ecommerces_CartComponent_vue___default.a
-    }
+    component: __WEBPACK_IMPORTED_MODULE_2__components_ecommerces_CartComponent_vue___default.a
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({ routes: routes });
@@ -51592,72 +51588,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
+        var itemsStorage = [];
+        if (JSON.parse(localStorage.getItem("cart")) != null) {
+            itemsStorage = JSON.parse(localStorage.getItem("cart"));
+        }
         return {
-            isShowingCart: false,
             cart: {
-                items: []
+                items: itemsStorage
             },
             products: [{
                 id: 1,
@@ -51712,6 +51652,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             product.inStock--;
+            localStorage.removeItem("cart");
+            localStorage.setItem("cart", JSON.stringify(this.cart.items));
         },
         getCartItem: function getCartItem(product) {
             for (var i = 0; i < this.cart.items.length; i++) {
@@ -51721,34 +51663,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             return null;
-        },
-        increaseQuantity: function increaseQuantity(cartItem) {
-            cartItem.product.inStock--;
-            cartItem.quantity++;
-        },
-        decreaseQuantity: function decreaseQuantity(cartItem) {
-            cartItem.quantity--;
-            cartItem.product.inStock++;
-
-            if (cartItem.quantity == 0) {
-                this.removeItemFromCart(cartItem);
-            }
-        },
-        removeItemFromCart: function removeItemFromCart(cartItem) {
-            var index = this.cart.items.indexOf(cartItem);
-
-            if (index !== -1) {
-                this.cart.items.splice(index, 1);
-            }
-        },
-        checkout: function checkout() {
-            if (confirm('Are you sure that you want to purchase these products?')) {
-                this.cart.items.forEach(function (item) {
-                    item.product.inStock += item.quantity;
-                });
-
-                this.cart.items = [];
-            }
         }
     },
     computed: {
@@ -51788,291 +51702,131 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "d-flex align-items-center" }, [
-      _c("div", { staticClass: "mr-auto" }, [
-        _c(
-          "a",
-          {
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.isShowingCart = false
-              }
-            }
-          },
-          [_c("strong", [_vm._v("E-commerce Inc.")])]
-        )
-      ]),
+      _c(
+        "div",
+        { staticClass: "mr-auto" },
+        [
+          _c("router-link", { attrs: { to: { name: "Ecommerce" } } }, [
+            _vm._v("E-commerce Inc.")
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("div", [
-        _c(
-          "span",
-          { staticClass: "stats" },
-          [
-            _vm._v(_vm._s(_vm.cart.items.length) + " "),
-            _vm.cart.items.length == 1 ? [_vm._v("item")] : [_vm._v("items")],
-            _vm._v(
-              " in cart, totalling " + _vm._s(_vm._f("currency")(_vm.cartTotal))
-            )
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                _vm.isShowingCart = true
-              }
-            }
-          },
-          [_vm._v("View Cart")]
-        )
-      ])
+      _c(
+        "div",
+        [
+          _c(
+            "span",
+            { staticClass: "stats" },
+            [
+              _vm._v(_vm._s(_vm.cart.items.length) + " "),
+              _vm.cart.items.length == 1 ? [_vm._v("item")] : [_vm._v("items")],
+              _vm._v(
+                " in cart, totalling " +
+                  _vm._s(_vm._f("currency")(_vm.cartTotal))
+              )
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "btn btn-primary", attrs: { to: { name: "Cart" } } },
+            [_vm._v("View Cart")]
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
-    !_vm.isShowingCart
-      ? _c(
+    _c(
+      "div",
+      {
+        staticClass: "row  align-items-center mt-3",
+        attrs: { id: "products" }
+      },
+      _vm._l(_vm.products, function(product) {
+        return _c(
           "div",
-          {
-            staticClass: "row  align-items-center mt-3",
-            attrs: { id: "products" }
-          },
-          _vm._l(_vm.products, function(product) {
-            return _c(
-              "div",
-              { staticClass: "item col-lg-4 d-flex align-items-stretch" },
-              [
-                _c("div", { staticClass: "card mt-3" }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: {
-                      src: "http://placehold.it/400x250/000/fff",
-                      alt: "Card image"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h4", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(product.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(_vm._s(product.description))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "row d-flex align-items-center" },
-                      [
-                        _c("div", { staticClass: "col-4" }, [
-                          _c("div", { staticClass: "lead" }, [
-                            _vm._v(_vm._s(_vm._f("currency")(product.price)))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "col-8 d-flex align-items-center justify-content-between"
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "number-in-stock",
-                                class: {
-                                  few:
-                                    product.inStock < 10 && product.inStock > 0,
-                                  none: product.inStock == 0
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(product.inStock) +
-                                    " in stock\n                            "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success",
-                                attrs: { disabled: product.inStock == 0 },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addProductToCart(product)
-                                  }
-                                }
-                              },
-                              [_vm._v("Add to cart")]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          }),
-          0
-        )
-      : _c("div", [
-          _c("h1", [_vm._v("Cart")]),
-          _vm._v(" "),
-          _vm.cart.items.length > 0
-            ? _c("table", { staticClass: "table table-striped" }, [
-                _vm._m(0),
+          { staticClass: "item col-lg-4 d-flex align-items-stretch" },
+          [
+            _c("div", { staticClass: "card mt-3" }, [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: {
+                  src: "http://placehold.it/400x250/000/fff",
+                  alt: "Card image"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(product.name))
+                ]),
                 _vm._v(" "),
-                _c(
-                  "tbody",
-                  [
-                    _vm._l(_vm.cart.items, function(item) {
-                      return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(item.product.name))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(item.quantity) +
-                              "  \n                            "
-                          ),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success",
-                              attrs: { disabled: item.product.inStock == 0 },
-                              on: {
-                                click: function($event) {
-                                  return _vm.increaseQuantity(item)
-                                }
-                              }
-                            },
-                            [_vm._v("+")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger",
-                              on: {
-                                click: function($event) {
-                                  return _vm.decreaseQuantity(item)
-                                }
-                              }
-                            },
-                            [_vm._v("-")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("currency")(
-                                item.quantity * item.product.price
-                              )
-                            )
-                          )
-                        ])
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(_vm._f("currency")(_vm.cartTotal)))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(_vm._f("currency")(_vm.taxAmount)))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("currency")(_vm.cartTotal + _vm.taxAmount)
-                          )
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { attrs: { colspan: "2" } }),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success",
-                            on: { click: _vm.checkout }
-                          },
-                          [_vm._v("Checkout")]
-                        )
-                      ])
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(product.description))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row d-flex align-items-center" }, [
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("div", { staticClass: "lead" }, [
+                      _vm._v(_vm._s(_vm._f("currency")(product.price)))
                     ])
-                  ],
-                  2
-                )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-8 d-flex align-items-center justify-content-between"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "number-in-stock",
+                          class: {
+                            few: product.inStock < 10 && product.inStock > 0,
+                            none: product.inStock == 0
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(product.inStock) +
+                              " in stock\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { disabled: product.inStock == 0 },
+                          on: {
+                            click: function($event) {
+                              return _vm.addProductToCart(product)
+                            }
+                          }
+                        },
+                        [_vm._v("Add to cart")]
+                      )
+                    ]
+                  )
+                ])
               ])
-            : _c("p", [_vm._v("Your cart is currently empty.")])
-        ])
+            ])
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Product")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Quantity")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Price")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-right", attrs: { colspan: "2" } }, [
-      _c("strong", [_vm._v("Subtotal")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-right", attrs: { colspan: "2" } }, [
-      _c("strong", [_vm._v("Taxes")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-right", attrs: { colspan: "2" } }, [
-      _c("strong", [_vm._v("Grand total")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -52211,9 +51965,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
+        var itemsStorage = [];
+        if (JSON.parse(localStorage.getItem("cart")) != null) {
+            itemsStorage = JSON.parse(localStorage.getItem("cart"));
+        }
         return {
             cart: {
-                items: []
+                items: itemsStorage
             }
         };
     },
@@ -52221,6 +51979,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         increaseQuantity: function increaseQuantity(cartItem) {
             cartItem.product.inStock--;
             cartItem.quantity++;
+            this.updateCart();
         },
         decreaseQuantity: function decreaseQuantity(cartItem) {
             cartItem.quantity--;
@@ -52229,6 +51988,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (cartItem.quantity == 0) {
                 this.removeItemFromCart(cartItem);
             }
+            this.updateCart();
         },
         removeItemFromCart: function removeItemFromCart(cartItem) {
             var index = this.cart.items.indexOf(cartItem);
@@ -52236,6 +51996,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (index !== -1) {
                 this.cart.items.splice(index, 1);
             }
+            this.updateCart();
         },
         checkout: function checkout() {
             if (confirm('Are you sure that you want to purchase these products?')) {
@@ -52245,12 +52006,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 this.cart.items = [];
             }
+            this.updateCart();
+        },
+        updateCart: function updateCart() {
+            localStorage.removeItem("cart");
+            localStorage.setItem("cart", JSON.stringify(this.cart.items));
         }
     },
     computed: {
         cartTotal: function cartTotal() {
             var total = 0;
-
+            console.log(this.cart.items);
             this.cart.items.forEach(function (item) {
                 total += item.quantity * item.product.price;
             });

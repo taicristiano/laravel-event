@@ -21,23 +21,19 @@ window.Vue.use(VueRouter);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 import Ecommerce from './components/ecommerces/EcommerceComponent.vue';
-import Cart from './components/ecommerces/CartComponent.vue';
+import CartComponent from './components/ecommerces/CartComponent.vue';
 
 const routes = [
     {
         path: '/',
         name: 'Ecommerce',
-        components: {
-            Ecommerce: Ecommerce
-        }
+        component: Ecommerce
     },
     {
         path: '/cart',
         name: 'Cart',
-        components: {
-            Cart: Cart
-        }
-    },
+        component: CartComponent
+    }
 ]
 
 const router = new VueRouter({ routes })
