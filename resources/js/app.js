@@ -21,7 +21,7 @@ window.Vue.use(VueRouter);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 import Ecommerce from './components/ecommerces/EcommerceComponent.vue';
-import CartComponent from './components/ecommerces/CartComponent.vue';
+import CartInfoComponent from './components/ecommerces/CartInfoComponent.vue';
 
 const routes = [
     {
@@ -32,7 +32,7 @@ const routes = [
     {
         path: '/cart',
         name: 'Cart',
-        component: CartComponent
+        component: CartInfoComponent
     }
 ]
 

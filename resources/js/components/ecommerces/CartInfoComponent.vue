@@ -1,15 +1,8 @@
 <template>
     <div>
-        <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                <router-link :to="{name: 'Ecommerce'}">E-commerce Inc.</router-link>
-            </div>
-            <div>
-                <span class="stats">{{ cart.items.length }} <template v-if="cart.items.length == 1">item</template><template v-else>items</template> in cart, totalling {{ cartTotal | currency }}</span>
-                <router-link :to="{name: 'Cart'}" class="btn btn-primary">View Cart</router-link>
-            </div>
-        </div>
-
+        <cart-header-component
+            :cart="cart">
+        </cart-header-component>
         <div>
             <h1>Cart</h1>
 
@@ -28,8 +21,12 @@
 
                         <td>
                             {{ item.quantity }} &nbsp;
-                            <button class="btn btn-success" @click="increaseQuantity(item)" :disabled="item.product.inStock == 0">+</button>
-                            <button class="btn btn-danger" @click="decreaseQuantity(item)">-</button>
+                            <button class="btn btn-success" @click="increaseQuantity(item)" :disabled="item.product.inStock == 0">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-danger" @click="decreaseQuantity(item)">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
                         </td>
 
                         <td>{{ item.quantity * item.product.price | currency }}</td>
@@ -72,6 +69,8 @@
 </template>
 
 <script>
+    import CartHeaderComponent from './CartHeaderComponent.vue';
+
     export default {
         data: function () {
             var itemsStorage = [];
@@ -83,6 +82,9 @@
                     items: itemsStorage,
                 },
             }
+        },
+        components: {
+            CartHeaderComponent
         },
         methods: {
             increaseQuantity: function(cartItem) {
