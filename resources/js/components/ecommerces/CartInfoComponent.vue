@@ -17,11 +17,11 @@
 
                 <tbody>
                     <tr v-for="item in cart.items">
-                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.name }}</td>
 
                         <td>
                             {{ item.quantity }} &nbsp;
-                            <button class="btn btn-success" @click="increaseQuantity(item)" :disabled="item.product.inStock == 0">
+                            <button class="btn btn-success" @click="increaseQuantity(item)" :disabled="item.inStock == 0">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                             <button class="btn btn-danger" @click="decreaseQuantity(item)">
@@ -29,7 +29,7 @@
                             </button>
                         </td>
 
-                        <td>{{ item.quantity * item.product.price | currency }}</td>
+                        <td>{{ item.quantity * item.price | currency }}</td>
                     </tr>
 
                     <tr>
@@ -73,33 +73,33 @@
 
     export default {
         data: function () {
-            var itemsStorage = [];
-            if (JSON.parse(localStorage.getItem("cart")) != null) {
-                itemsStorage = JSON.parse(localStorage.getItem("cart"));
-            }
             return {
                 cart: {
-                    items: itemsStorage,
+                    items: [],
                 },
+                total: 0,
             }
+        },
+        mounted() {
+            this.getCart();
         },
         components: {
             CartHeaderComponent
         },
         methods: {
             increaseQuantity: function(cartItem) {
-                cartItem.product.inStock--;
+                cartItem.inStock--;
                 cartItem.quantity++;
-                this.updateCart();
+                this.updateCart(cartItem);
             },
             decreaseQuantity: function(cartItem) {
                 cartItem.quantity--;
-                cartItem.product.inStock++;
+                cartItem.inStock++;
 
                 if (cartItem.quantity == 0) {
                     this.removeItemFromCart(cartItem);
                 }
-                this.updateCart();
+                this.updateCart(cartItem);
             },
             removeItemFromCart: function(cartItem) {
                 var index = this.cart.items.indexOf(cartItem);
@@ -107,30 +107,70 @@
                 if (index !== -1) {
                     this.cart.items.splice(index, 1);
                 }
-                this.updateCart();
             },
             checkout: function() {
                 if (confirm('Are you sure that you want to purchase these products?')) {
-                    this.cart.items.forEach(function(item) {
-                        item.product.inStock += item.quantity;
-                    });
+                    console.log(this.cart.items, this.total);
+                    var dataPost = {
+                        'items': this.cart.items,
+                        'total': this.total
+                    }
+                    var app = this
+                    var url = 'api/v1/carts/checkout'
+                    axios.post(url, dataPost)
+                        .then(function (response) {
+                            console.log("oke");
+                            app.cart.items = [];
+                            window.location.href = 'ecommerce'
+                        })
+                        .catch(function (response) {
+                            console.log(response);
+                            alert("Could not load cart");
+                        });
 
-                    this.cart.items = [];
                 }
-                this.updateCart();
+                // this.updateCart();
             },
-            updateCart: function() {
-                localStorage.removeItem("cart");
-                localStorage.setItem("cart", JSON.stringify(this.cart.items));
+            updateCart: function(cartItem) {
+                var dataPost = {
+                    product_id: cartItem.id,
+                    cart_id: cartItem.cart_id,
+                    is_update: true,
+                    quantity: cartItem.quantity,
+                    inStock: cartItem.inStock
+                }
+
+                var app = this
+                var url = 'api/v1/carts'
+                axios.post(url, dataPost)
+                    .then(function (response) {
+                        console.log('oke');
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                        alert("Could not update cart products");
+                    });
+            },
+            getCart: function() {
+                var app = this
+                var url = 'api/v1/carts'
+                axios.get(url)
+                    .then(function (response) {
+                        app.cart.items = response.data
+                    })
+                    .catch(function (response) {
+                        console.log(response);
+                        alert("Could not load cart");
+                    });
             }
         },
         computed: {
             cartTotal: function() {
                 var total = 0;
-                console.log(this.cart.items);
                 this.cart.items.forEach(function(item) {
-                    total += item.quantity * item.product.price;
+                    total += item.quantity * item.price;
                 });
+                this.total = total;
 
                 return total;
             },

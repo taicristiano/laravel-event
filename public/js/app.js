@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(6);
-var isBuffer = __webpack_require__(20);
+var isBuffer = __webpack_require__(21);
 
 /*global toString:true*/
 
@@ -517,7 +517,7 @@ module.exports = function normalizeComponent (
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(22);
+var normalizeHeaderName = __webpack_require__(23);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -13790,12 +13790,12 @@ process.umask = function() { return 0; };
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(23);
-var buildURL = __webpack_require__(25);
-var parseHeaders = __webpack_require__(26);
-var isURLSameOrigin = __webpack_require__(27);
+var settle = __webpack_require__(24);
+var buildURL = __webpack_require__(26);
+var parseHeaders = __webpack_require__(27);
+var isURLSameOrigin = __webpack_require__(28);
 var createError = __webpack_require__(9);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(28);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(29);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13892,7 +13892,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(29);
+      var cookies = __webpack_require__(30);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13976,7 +13976,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(24);
+var enhanceError = __webpack_require__(25);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -14036,18 +14036,65 @@ module.exports = Cancel;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(13);
-module.exports = __webpack_require__(54);
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(48)
+/* template */
+var __vue_template__ = __webpack_require__(49)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ecommerces/CartHeaderComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-717a0ebf", Component.options)
+  } else {
+    hotAPI.reload("data-v-717a0ebf", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
 
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(14);
+module.exports = __webpack_require__(54);
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ecommerces_EcommerceComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ecommerces_CartInfoComponent_vue__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ecommerces_CartInfoComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ecommerces_CartInfoComponent_vue__);
@@ -14058,9 +14105,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(14);
+__webpack_require__(15);
 
-window.Vue = __webpack_require__(37);
+window.Vue = __webpack_require__(38);
 
 
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
@@ -14071,7 +14118,7 @@ window.Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(42));
+Vue.component('example-component', __webpack_require__(43));
 
 
 
@@ -14091,11 +14138,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({ r
 var app = new Vue({ router: router }).$mount('#app');
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(15);
+window._ = __webpack_require__(16);
 window.Popper = __webpack_require__(4).default;
 
 /**
@@ -14107,7 +14154,7 @@ window.Popper = __webpack_require__(4).default;
 try {
   window.$ = window.jQuery = __webpack_require__(5);
 
-  __webpack_require__(17);
+  __webpack_require__(18);
 } catch (e) {}
 
 /**
@@ -14116,7 +14163,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(18);
+window.axios = __webpack_require__(19);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -14152,7 +14199,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31264,10 +31311,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(17)(module)))
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -31295,7 +31342,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -35736,13 +35783,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(20);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35750,7 +35797,7 @@ module.exports = __webpack_require__(19);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(6);
-var Axios = __webpack_require__(21);
+var Axios = __webpack_require__(22);
 var defaults = __webpack_require__(3);
 
 /**
@@ -35785,14 +35832,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(11);
-axios.CancelToken = __webpack_require__(35);
+axios.CancelToken = __webpack_require__(36);
 axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(36);
+axios.spread = __webpack_require__(37);
 
 module.exports = axios;
 
@@ -35801,7 +35848,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 /*!
@@ -35828,7 +35875,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35836,8 +35883,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(30);
-var dispatchRequest = __webpack_require__(31);
+var InterceptorManager = __webpack_require__(31);
+var dispatchRequest = __webpack_require__(32);
 
 /**
  * Create a new instance of Axios
@@ -35914,7 +35961,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35933,7 +35980,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35966,7 +36013,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35994,7 +36041,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36067,7 +36114,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36127,7 +36174,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36202,7 +36249,7 @@ module.exports = (
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36245,7 +36292,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36305,7 +36352,7 @@ module.exports = (
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36364,18 +36411,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(32);
+var transformData = __webpack_require__(33);
 var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(3);
-var isAbsoluteURL = __webpack_require__(33);
-var combineURLs = __webpack_require__(34);
+var isAbsoluteURL = __webpack_require__(34);
+var combineURLs = __webpack_require__(35);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -36457,7 +36504,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36484,7 +36531,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36505,7 +36552,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36526,7 +36573,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36590,7 +36637,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36624,18 +36671,18 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 if (false) {
   module.exports = require('./vue.common.prod.js')
 } else {
-  module.exports = __webpack_require__(38)
+  module.exports = __webpack_require__(39)
 }
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48489,10 +48536,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(39).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(40).setImmediate))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -48548,7 +48595,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(40);
+__webpack_require__(41);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -48562,7 +48609,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -48755,7 +48802,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51380,15 +51427,15 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(45)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51427,7 +51474,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51456,7 +51503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51499,13 +51546,13 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(47)
 /* template */
 var __vue_template__ = __webpack_require__(50)
 /* template functional */
@@ -51546,12 +51593,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__);
 //
 //
@@ -51588,87 +51635,99 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        var itemsStorage = [];
-        if (JSON.parse(localStorage.getItem("cart")) != null) {
-            itemsStorage = JSON.parse(localStorage.getItem("cart"));
-        }
         return {
             cart: {
-                items: itemsStorage
+                items: []
             },
-            products: [{
-                id: 1,
-                name: 'MacBook Pro (15 inch)',
-                description: 'This laptop has a super crisp Retina display. Yes, we know that it\'s overpriced...',
-                price: 2999,
-                inStock: 50,
-                image: 'https://macone.vn/wp-content/uploads/2018/06/15inch_2018_gray.jpg'
-            }, {
-                id: 2,
-                name: 'Samsung Galaxy Note 7',
-                description: 'Unlike the overpriced MacBook Pro, we\'re selling this one a bit cheap...',
-                price: 299,
-                inStock: 755,
-                image: 'https://cdn.fptshop.com.vn/Uploads/Originals/2016/8/5/636060120230577954_s7-silver-1.jpg'
-            }, {
-                id: 3,
-                name: 'HP Officejet 5740 printer',
-                description: 'This one might not last for so long, but hey, printers never work anyways, right?',
-                price: 149,
-                inStock: 5,
-                image: 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04339763.png'
-            }, {
-                id: 4,
-                name: 'iPhone 7 cover',
-                description: 'Having problems keeping a hold of that phone, huh? Ever considered not dropping ...',
-                price: 49,
-                inStock: 42,
-                image: 'http://trianium.com/wp-content/uploads/2016/10/00120.jpg'
-            }, {
-                id: 5,
-                name: 'iPad Pro (9.7 inch)',
-                description: 'We heard it\'s supposed to be pretty good. At least that\'s what people say.',
-                price: 599,
-                inStock: 0,
-                image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/image/AppleInc/aos/published/images/r/fb/rfb/97/rfb-97-ipad-pro-silver-wifi-2015?wid=572&hei=572&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1542160026733'
-            }, {
-                id: 6,
-                name: 'OnePlus 3 cover',
-                description: 'Does your phone spend most of its time on the ground? This cheap piece of plastic ...',
-                price: 19,
-                inStock: 81,
-                image: 'https://ae01.alicdn.com/kf/HTB1KgiDKVXXXXclXVXXq6xXFXXXp/Oneplus-3-tr-ng-h-p-B-Thu-S-n-ban-u-c-ng-M-Y.jpg'
-            }]
+            products: []
         };
     },
+    mounted: function mounted() {
+        this.getProducts();
+        this.getCart();
+    },
+
     components: {
         CartHeaderComponent: __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue___default.a
     },
     methods: {
         addProductToCart: function addProductToCart(product) {
             var cartItem = this.getCartItem(product);
-
             if (cartItem != null) {
-                cartItem.quantity++;
+                console.log(cartItem.inStock, product.inStock);
+                var quantity = cartItem.quantity + 1;
+                var dataPost = {
+                    product_id: cartItem.id,
+                    cart_id: cartItem.cart_id,
+                    is_update: true,
+                    quantity: quantity,
+                    inStock: product.inStock - 1
+                };
             } else {
-                this.cart.items.push({
-                    product: product,
-                    quantity: 1
-                });
+                var cartId = null;
+                if (this.cart.items.length) {
+                    cartId = this.cart.items[0].cart_id;
+                }
+                var dataPost = {
+                    product_id: product.id,
+                    cart_id: cartId,
+                    is_update: false,
+                    quantity: 1,
+                    inStock: product.inStock - 1
+                };
             }
 
-            product.inStock--;
-            localStorage.removeItem("cart");
-            localStorage.setItem("cart", JSON.stringify(this.cart.items));
+            var app = this;
+            var url = 'api/v1/carts';
+            axios.post(url, dataPost).then(function (response) {
+                if (cartItem == null) {
+                    var productItem = {
+                        id: product.id,
+                        cart_id: response.data,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1,
+                        stock: product.inStock - 1
+                    };
+                    app.cart.items.push(productItem);
+                } else {
+                    cartItem.quantity++;
+                    cartItem.inStock--;
+                }
+                console.log(product.inStock);
+                product.inStock--;
+                console.log(product.inStock);
+            }).catch(function (response) {
+                console.log(response);
+                alert("Could not update cart products");
+            });
         },
         getCartItem: function getCartItem(product) {
             for (var i = 0; i < this.cart.items.length; i++) {
-                if (this.cart.items[i].product.id === product.id) {
+                if (this.cart.items[i].id === product.id) {
                     return this.cart.items[i];
                 }
             }
 
             return null;
+        },
+        getProducts: function getProducts() {
+            var app = this;
+            var url = 'api/v1/products';
+            axios.get(url).then(function (response) {
+                app.products = response.data;
+            }).catch(function (response) {
+                alert("Could not load products");
+            });
+        },
+        getCart: function getCart() {
+            var app = this;
+            var url = 'api/v1/carts';
+            axios.get(url).then(function (response) {
+                app.cart.items = response.data;
+            }).catch(function (response) {
+                alert("Could not load cart");
+            });
         }
     },
     filters: {
@@ -51683,53 +51742,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(48)
-/* template */
-var __vue_template__ = __webpack_require__(49)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/ecommerces/CartHeaderComponent.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-717a0ebf", Component.options)
-  } else {
-    hotAPI.reload("data-v-717a0ebf", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
 
 /***/ }),
 /* 48 */
@@ -51762,9 +51774,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         cartTotal: function cartTotal() {
             var total = 0;
-            console.log(this.cart.items);
             this.cart.items.forEach(function (item) {
-                total += item.quantity * item.product.price;
+                total += item.quantity * item.price;
             });
 
             return total;
@@ -51888,7 +51899,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row d-flex align-items-center" }, [
-                    _c("div", { staticClass: "col-4" }, [
+                    _c("div", { staticClass: "col-4 pr-0" }, [
                       _c("div", { staticClass: "lead" }, [
                         _vm._v(_vm._s(_vm._f("currency")(product.price)))
                       ])
@@ -51898,7 +51909,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "col-8 d-flex align-items-center justify-content-between"
+                          "col-8 d-flex align-items-center justify-content-between pl-0"
                       },
                       [
                         _c(
@@ -52015,7 +52026,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue__);
 //
 //
@@ -52092,33 +52103,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        var itemsStorage = [];
-        if (JSON.parse(localStorage.getItem("cart")) != null) {
-            itemsStorage = JSON.parse(localStorage.getItem("cart"));
-        }
         return {
             cart: {
-                items: itemsStorage
-            }
+                items: []
+            },
+            total: 0
         };
     },
+    mounted: function mounted() {
+        this.getCart();
+    },
+
     components: {
         CartHeaderComponent: __WEBPACK_IMPORTED_MODULE_0__CartHeaderComponent_vue___default.a
     },
     methods: {
         increaseQuantity: function increaseQuantity(cartItem) {
-            cartItem.product.inStock--;
+            cartItem.inStock--;
             cartItem.quantity++;
-            this.updateCart();
+            this.updateCart(cartItem);
         },
         decreaseQuantity: function decreaseQuantity(cartItem) {
             cartItem.quantity--;
-            cartItem.product.inStock++;
+            cartItem.inStock++;
 
             if (cartItem.quantity == 0) {
                 this.removeItemFromCart(cartItem);
             }
-            this.updateCart();
+            this.updateCart(cartItem);
         },
         removeItemFromCart: function removeItemFromCart(cartItem) {
             var index = this.cart.items.indexOf(cartItem);
@@ -52126,30 +52138,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (index !== -1) {
                 this.cart.items.splice(index, 1);
             }
-            this.updateCart();
         },
         checkout: function checkout() {
             if (confirm('Are you sure that you want to purchase these products?')) {
-                this.cart.items.forEach(function (item) {
-                    item.product.inStock += item.quantity;
+                console.log(this.cart.items, this.total);
+                var dataPost = {
+                    'items': this.cart.items,
+                    'total': this.total
+                };
+                var app = this;
+                var url = 'api/v1/carts/checkout';
+                axios.post(url, dataPost).then(function (response) {
+                    console.log("oke");
+                    app.cart.items = [];
+                    window.location.href = 'ecommerce';
+                }).catch(function (response) {
+                    console.log(response);
+                    alert("Could not load cart");
                 });
-
-                this.cart.items = [];
             }
-            this.updateCart();
+            // this.updateCart();
         },
-        updateCart: function updateCart() {
-            localStorage.removeItem("cart");
-            localStorage.setItem("cart", JSON.stringify(this.cart.items));
+        updateCart: function updateCart(cartItem) {
+            var dataPost = {
+                product_id: cartItem.id,
+                cart_id: cartItem.cart_id,
+                is_update: true,
+                quantity: cartItem.quantity,
+                inStock: cartItem.inStock
+            };
+
+            var app = this;
+            var url = 'api/v1/carts';
+            axios.post(url, dataPost).then(function (response) {
+                console.log('oke');
+            }).catch(function (response) {
+                console.log(response);
+                alert("Could not update cart products");
+            });
+        },
+        getCart: function getCart() {
+            var app = this;
+            var url = 'api/v1/carts';
+            axios.get(url).then(function (response) {
+                app.cart.items = response.data;
+            }).catch(function (response) {
+                console.log(response);
+                alert("Could not load cart");
+            });
         }
     },
     computed: {
         cartTotal: function cartTotal() {
             var total = 0;
-            console.log(this.cart.items);
             this.cart.items.forEach(function (item) {
-                total += item.quantity * item.product.price;
+                total += item.quantity * item.price;
             });
+            this.total = total;
 
             return total;
         },
@@ -52195,7 +52240,7 @@ var render = function() {
                 [
                   _vm._l(_vm.cart.items, function(item) {
                     return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(item.product.name))]),
+                      _c("td", [_vm._v(_vm._s(item.name))]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
@@ -52207,7 +52252,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-success",
-                            attrs: { disabled: item.product.inStock == 0 },
+                            attrs: { disabled: item.inStock == 0 },
                             on: {
                               click: function($event) {
                                 return _vm.increaseQuantity(item)
@@ -52243,11 +52288,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
-                          _vm._s(
-                            _vm._f("currency")(
-                              item.quantity * item.product.price
-                            )
-                          )
+                          _vm._s(_vm._f("currency")(item.quantity * item.price))
                         )
                       ])
                     ])

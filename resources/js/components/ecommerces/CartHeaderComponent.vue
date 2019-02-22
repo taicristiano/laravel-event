@@ -23,9 +23,8 @@
         computed: {
             cartTotal: function() {
                 var total = 0;
-                console.log(this.cart.items);
                 this.cart.items.forEach(function(item) {
-                    total += item.quantity * item.product.price;
+                    total += item.quantity * item.price;
                 });
 
                 return total;
