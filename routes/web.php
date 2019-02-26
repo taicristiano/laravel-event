@@ -18,3 +18,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/chat', function() {
+    return view('chat');
+})-> middleware('auth');
+
+Route::get('/getUserLogin', function() {
+    return Auth::user();
+})->middleware('auth');
+
+Route::get('/messages', function() {
+    return App\Message::with('user')->get();
+})->middleware('auth');
+
+Route::post('/messages', function() {
+    $user = Auth::user();
+    $message = $user->messages()->create(['message'=> request()->get('message')]);
+    // broadcast(new App\Events\MessagePosted($message, $user))->toOthers();
+    event(new App\Events\MessagePosted($message, $user));
+    return ['status' => 'OK'];
+})->middleware('auth');

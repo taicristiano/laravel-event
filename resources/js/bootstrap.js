@@ -54,3 +54,15 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+
+import Echo from 'laravel-echo'
+
+window.io = require('socket.io-client');
+
+window.Echo = new Echo({
+    namespace: 'App\\Events\\MessagePosted',
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+});
+console.log(window.location.hostname);
