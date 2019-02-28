@@ -63,3 +63,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+//Command
+php artisan preset react
+npm install
+npm run dev
+npm install react-router@2.8.1
