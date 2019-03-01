@@ -29,9 +29,9 @@ class CreateProduct extends Component {
         }
         let uri = MyGlobleSetting.url + '/api/products';
         axios.post(uri, products).then((response) => {
-            browserHistory.push('/display-item');
+            browserHistory.push('/');
         });
-      }
+     }
 
     render() {
         return (
@@ -50,7 +50,7 @@ class CreateProduct extends Component {
                         <div className="col-md-6">
                             <div className="form-group">
                                 <label>Product Body:</label>
-                                <textarea className="form-control col-md-6" onChange={this.handleChange2}></textarea>
+                                <textarea className="form-control" onChange={this.handleChange2}></textarea>
                             </div>
                         </div>
                     </div><br />

@@ -12,7 +12,7 @@ class TableRow extends Component {
         event.preventDefault();
         let uri = MyGlobleSetting.url + `/api/products/${this.props.obj.id}`;
         axios.delete(uri);
-          browserHistory.push('/display-item');
+          browserHistory.push('/');
     }
     render() {
         return (

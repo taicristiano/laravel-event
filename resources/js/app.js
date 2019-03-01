@@ -26,10 +26,10 @@ require('./components/Example');
 
 render(
     <Router history={browserHistory}>
-        <Route path="/" component={Master} >
-            <Route path="/add-item" component={CreateProduct} />
-            <Route path="/display-item" component={DisplayProduct} />
-            <Route path="/edit/:id" component={UpdateProduct} />
+        <Route component={Master} >
+            <Route path="/product/create" component={CreateProduct} />
+            <Route path="/" component={DisplayProduct} />
+            <Route path="/product/edit/:id" component={UpdateProduct} />
         </Route>
     </Router>,
     document.getElementById('crud-app')

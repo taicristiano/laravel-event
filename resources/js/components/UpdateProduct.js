@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 import MyGlobleSetting from './MyGlobleSetting';
+import {browserHistory} from 'react-router';
 
 class UpdateProduct extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class UpdateProduct extends Component {
         }
         let uri = MyGlobleSetting.url + '/api/products/'+this.props.params.id;
         axios.patch(uri, products).then((response) => {
-            this.props.history.push('/display-item');
+            browserHistory.push('/');
         });
     }
     render() {
@@ -48,7 +49,7 @@ class UpdateProduct extends Component {
                 <div className="row">
                     <div className="col-md-10"></div>
                     <div className="col-md-2">
-                        <Link to="/display-item" className="btn btn-success">Return to Product</Link>
+                        <Link to="/" className="btn btn-success">Return to Product</Link>
                     </div>
                 </div>
                 <form onSubmit={this.handleSubmit}>
